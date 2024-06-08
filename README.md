@@ -59,15 +59,6 @@ To run this project, you will need to add the following environment variables to
 | `token`      | `string` | **Required**. min length 100|
 
 ```http
-  POST /api/vr/*
-```
-
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `username`      | `string` | **Required**. must be registered|
-| `token`      | `string` | **Required**. min length 100|
-
-```http
   POST /api/vr/logout
 ```
 
