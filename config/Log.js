@@ -6,6 +6,10 @@ mongoose.connect("mongodb://localhost:27017/log", {
 });
 
 const log = mongoose.Schema({
+    service: {
+        type: String,
+        required: true
+    },
     username: {
         type: String,
         required: true

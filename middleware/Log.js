@@ -14,6 +14,7 @@ const Log = async (req,res,next) => {
 
         res.on('finish', async () => {
             const insert = new log({
+                service: process.env.SERVICE,
                 username: req.body.username || 'Outsiders',
                 device: req.body.device,
                 token: req.body.token || 'Outsiders',
