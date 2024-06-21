@@ -12,7 +12,7 @@ export const Mandatory = async (req,res,next) => {
 
         if (!errors.isEmpty()) {
             return res.json({
-                server_status: true,
+                server_status: false,
                 server_message: 'StrikeOuts!',
                 response: errors.array().map(error => error.msg)
             });
@@ -20,7 +20,7 @@ export const Mandatory = async (req,res,next) => {
 
         if(req.body.signature !== process.env.SERVER_SIGNATURE) {
             return res.json({
-                server_status: true,
+                server_status: false,
                 server_message: 'StrikeOuts!',
                 response: ['Unknown error']
             });
@@ -30,7 +30,7 @@ export const Mandatory = async (req,res,next) => {
 
     } catch (error) {
         return res.json({
-            server_status: true,
+            server_status: false,
             server_message: 'StrikeOuts!',
             response: error
         });

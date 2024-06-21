@@ -11,6 +11,14 @@ export const Logout = async(req,res) => {
         const body = req.body;
         const modules = await MLogout(body.username,body.device,body.token); 
         
+        if (modules.status == false) {
+            return res.json({
+                server_status: false,
+                server_message: 'StrikeOuts!',
+                response: 'Failed to Logout'
+            });
+        }
+
         return res.json({
             server_status: true,
             server_message: 'HomeRun!',
