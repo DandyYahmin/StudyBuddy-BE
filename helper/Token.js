@@ -48,7 +48,7 @@ export async function MobileToken(username) {
 }
 
 async function tokenGenerator(length) {
-    const strResult = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq!@#$%?~&';
+    const strResult = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq!@#$%?~&-';
     let result = '';
 
     for (let i = 0; i < length; i++) {
