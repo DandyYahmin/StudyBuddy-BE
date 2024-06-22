@@ -32,7 +32,7 @@ export const Token = async (req,res, next) => {
                 server_status: false,
                 server_message: 'StrikeOuts!',
                 response: {
-                    message: 'You have been logged out'
+                    message: 'Invalid access token'
                 }
             });
         }
