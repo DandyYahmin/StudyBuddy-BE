@@ -82,7 +82,7 @@ I use this project on:
 
 End User License Agreement (EULA)
 
-Last updated: `6 June 2024`
+Last updated: `23 July 2024`
 
 This `End User License Agreement` is a legal contract between `you` and `Dandy D. Al Yahmin` regarding use of the software, including all materials in it. `By installing, using or modifying this Software, you agree to be bound by the terms of this Agreement`.
 
