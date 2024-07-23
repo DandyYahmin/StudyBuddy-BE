@@ -1,9 +1,9 @@
-import { body, validationResult } from "express-validator";
+import { body, header, validationResult } from "express-validator";
 
 export const MandatoryValidator = [
     body('device').not().isEmpty().withMessage('Unknown error')
         .isIn(['web', 'mobile']).withMessage('Unknown error'),
-    body('signature').not().isEmpty().withMessage('Unknown error')
+    header('signature').not().isEmpty().withMessage('Unknown error')
 ];
 
 export const Mandatory = async (req,res,next) => {
@@ -18,7 +18,9 @@ export const Mandatory = async (req,res,next) => {
             });
         }
 
-        if(req.body.signature !== process.env.SERVER_SIGNATURE) {
+        const signature = req.headers.signature
+
+        if(signature !== process.env.SERVER_SIGNATURE) {
             return res.json({
                 server_status: false,
                 server_message: 'StrikeOuts!',
