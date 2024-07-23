@@ -2,9 +2,7 @@ import { body, validationResult } from "express-validator";
 import database from '../config/Database.js';
 
 export const TokenValidator = [
-    body('username').not().isEmpty().withMessage('Missing username parameter'),
-    body('token').not().isEmpty().withMessage('Missing token parameter')
-        .isLength({ min: 100, max: 100 }).withMessage('Invalid token parameter expression'),
+    body('username').not().isEmpty().withMessage('Missing username parameter')
 ];
 
 export const Token = async (req,res, next) => {
@@ -19,11 +17,24 @@ export const Token = async (req,res, next) => {
             });
         }
 
+        const authHeader = req.headers['authorization'];
+    
+        if (authHeader && authHeader.startsWith('Bearer ')) {
+            const token = authHeader.substring(7, authHeader.length);
+            req.token = token;
+        } else {
+            return res.json({
+                status: false,
+                message: 'StrikeOuts!',
+                response: ['Invalid token']
+            });
+        }
+
         const body = req.body;
 
         const [checkToken] = await database.query('SELECT EXPIRED_DATE AS EXPIRED FROM TOKENS WHERE USERNAME = ? AND BINARY TOKEN = ? AND DEVICE = ?',[
             body.username,
-            body.token,
+            req.token,
             body.device
         ]);
 
