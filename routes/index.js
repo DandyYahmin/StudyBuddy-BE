@@ -13,15 +13,15 @@ router.get('/', (req, res) => {
     res.json({ message: 'Server is running' });
 });
 
-// router.group('/api', router => {
-//     // router.use('/*', MandatoryValidator, Mandatory, Log);
-//     router.post('/register', RegisterValidator, Register); 
-//     router.post('/login', LoginValidator, Login);
-//     router.group('/vr', router => {
-//         router.use('/*', TokenValidator, Token);
-//         router.post('/test', (req, res) => {res.json(true);});
-//         router.post('/logout', Logout);
-//     });
-// });
+router.group('/api', router => {
+    // router.use('/*', MandatoryValidator, Mandatory, Log);
+    router.post('/register', RegisterValidator, Register); 
+    router.post('/login', LoginValidator, Login);
+    router.group('/vr', router => {
+        router.use('/*', TokenValidator, Token);
+        router.post('/test', (req, res) => {res.json(true);});
+        router.post('/logout', Logout);
+    });
+});
 
 export default router;
