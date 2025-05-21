@@ -2,7 +2,8 @@ import { body, validationResult } from "express-validator";
 import database from '../config/Database.js';
 
 export const TokenValidator = [
-    body('username').not().isEmpty().withMessage('Missing username parameter')
+    body('email').not().isEmpty().withMessage('Missing email parameter'),
+    body('device').not().isEmpty().withMessage('Missing device parameter').isIn(['web', 'mobile']).withMessage('Device must be either web or mobile')
 ];
 
 export const Token = async (req,res, next) => {
@@ -32,12 +33,12 @@ export const Token = async (req,res, next) => {
 
         const body = req.body;
 
-        const [checkToken] = await database.query('SELECT EXPIRED_DATE AS EXPIRED FROM TOKENS WHERE USERNAME = ? AND BINARY TOKEN = ? AND DEVICE = ?',[
-            body.username,
+        const [checkToken] = await database.query('SELECT EXPIRED_DATE AS EXPIRED FROM TOKENS WHERE EMAIL = ? AND BINARY TOKEN = ? AND DEVICE = ?',[
+            body.email,
             req.token,
             body.device
         ]);
-
+        
         if(checkToken.length === 0 || new Date(checkToken[0].EXPIRED) <= new Date()) {
             return res.json({
                 server_status: false,

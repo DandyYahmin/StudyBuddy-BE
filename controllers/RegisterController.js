@@ -2,8 +2,9 @@ import { body, validationResult } from "express-validator";
 import { MRegister } from "../modules/RegisterModules.js";
 
 export const RegisterValidator = [
-    body('username').not().isEmpty().withMessage('Missing username parameter'),
-    body('password').not().isEmpty().withMessage('Missing password parameter')
+    body('email').not().isEmpty().withMessage('Missing email parameter'),
+    body('password').not().isEmpty().withMessage('Missing password parameter'),
+    body('name').not().isEmpty().withMessage('Missing name parameter')
 ];
 
 export const Register = async(req,res) => {
@@ -19,14 +20,14 @@ export const Register = async(req,res) => {
         }
 
         const body = req.body;
-        const modules = await MRegister(body.username, body.password); 
+        const modules = await MRegister(body.email, body.password, body.name); 
         
         if(modules.status == false) {
             return res.json({
                 server_status: false,
                 server_message: 'StrikeOuts!',
                 response: {
-                    message: 'Aww username is taken'
+                    message: 'Aww email is taken'
                 }
             });
         }
@@ -35,7 +36,7 @@ export const Register = async(req,res) => {
             server_status: true,
             server_message: 'HomeRun!',
             response: {
-                message: `${body.username} is successfully registered to server`
+                message: `${body.email} is successfully registered to server`
             }
         });
         

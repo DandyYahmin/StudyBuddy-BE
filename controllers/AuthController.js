@@ -2,14 +2,20 @@ import { MLogin, MLogout } from "../modules/AuthModules.js";
 import { body, validationResult } from "express-validator";
 
 export const LoginValidator = [
-    body('username').not().isEmpty().withMessage('Missing username parameter'),
-    body('password').not().isEmpty().withMessage('Missing password parameter')
+    body('email').not().isEmpty().withMessage('Missing email parameter'),
+    body('password').not().isEmpty().withMessage('Missing password parameter'),
+    body('device').not().isEmpty().withMessage('Missing device parameter').isIn(['web', 'mobile']).withMessage('Device must be either web or mobile')
+];
+
+export const LogoutValidator = [
+    body('email').not().isEmpty().withMessage('Missing email parameter'),
+    body('device').not().isEmpty().withMessage('Missing device parameter').isIn(['web', 'mobile']).withMessage('Device must be either web or mobile')
 ];
 
 export const Logout = async(req,res) => {
     try {
         const body = req.body;
-        const modules = await MLogout(body.username,body.device,body.token); 
+        const modules = await MLogout(body.email,body.device); 
         
         if (modules.status == false) {
             return res.json({
@@ -48,14 +54,14 @@ export const Login = async(req,res) => {
         }
 
         const body = req.body;
-        const modules = await MLogin(body.username, body.password, body.device); 
+        const modules = await MLogin(body.email, body.password, body.device); 
         
         if(modules.status == false) {
             return res.json({
                 server_status: false,
                 server_message: 'StrikeOuts!',
                 response: {
-                    message: 'Username or Password is incorrect'
+                    message: 'email or Password is incorrect'
                 }
             });
         }

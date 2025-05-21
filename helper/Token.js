@@ -1,19 +1,19 @@
 import database from '../config/Database.js';
 
-export async function WebToken(username) {
+export async function WebToken(email) {
     try {
-        const [checkToken] = await database.query("SELECT USERNAME FROM TOKENS WHERE USERNAME = ? AND DEVICE = 'web'", [username]);
+        const [checkToken] = await database.query("SELECT email FROM TOKENS WHERE email = ? AND DEVICE = 'web'", [email]);
         
         const token = await tokenGenerator(100);
         const expired = new Date(Date.now() + 60 * 60 * 1000)
         
         if(checkToken.length === 0) {
-            const insertToken = await database.query("INSERT INTO TOKENS(USERNAME,TOKEN,EXPIRED_DATE,DEVICE) VALUES(?,?,?,'web')",
-                [username,token,expired]
+            const insertToken = await database.query("INSERT INTO TOKENS(email,TOKEN,EXPIRED_DATE,DEVICE) VALUES(?,?,?,'web')",
+                [email,token,expired]
             );
         }else {
-            const updateToken = await database.query("UPDATE TOKENS SET TOKEN = ?, EXPIRED_DATE = ? WHERE USERNAME = ? AND DEVICE = 'web'",
-                [token,expired,username]
+            const updateToken = await database.query("UPDATE TOKENS SET TOKEN = ?, EXPIRED_DATE = ? WHERE email = ? AND DEVICE = 'web'",
+                [token,expired,email]
             );
         }
     
@@ -23,21 +23,21 @@ export async function WebToken(username) {
     }
 }
 
-export async function MobileToken(username) {
+export async function MobileToken(email) {
     try {
-        const [checkToken] = await database.query("SELECT USERNAME FROM TOKENS WHERE USERNAME = ? AND DEVICE = 'mobile'", [username]);
+        const [checkToken] = await database.query("SELECT email FROM TOKENS WHERE email = ? AND DEVICE = 'mobile'", [email]);
         
         const token = await tokenGenerator(100);
         const currentDate = new Date();
         const expired = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
         
         if(checkToken.length === 0) {
-            const insertToken = await database.query("INSERT INTO TOKENS(USERNAME,TOKEN,EXPIRED_DATE,DEVICE) VALUES(?,?,?,'mobile')",
-                [username,token,expired]
+            const insertToken = await database.query("INSERT INTO TOKENS(email,TOKEN,EXPIRED_DATE,DEVICE) VALUES(?,?,?,'mobile')",
+                [email,token,expired]
             );
         }else {
-            const updateToken = await database.query("UPDATE TOKENS SET TOKEN = ?, EXPIRED_DATE = ? WHERE USERNAME = ? AND DEVICE = 'mobile'",
-                [token,expired,username]
+            const updateToken = await database.query("UPDATE TOKENS SET TOKEN = ?, EXPIRED_DATE = ? WHERE email = ? AND DEVICE = 'mobile'",
+                [token,expired,email]
             );
         }
     
