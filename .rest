@@ -1,0 +1,39 @@
+###
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+    "email": "dandy@gmail.com",
+    "password": "ganteng",
+    "name": "dandy"
+}
+
+###
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+    "email": "dandy@gmail.com",
+    "password": "ganteng",
+    "device": "mobile"
+}
+
+###
+POST http://localhost:3000/api/vr/test
+Content-Type: application/json
+Authorization: Bearer mRr@JqCJiat~RMlVaINZNc~liey8Bkieaa$KT5-dZmlnlW4mmoFUhIMY2RINvfXYH58KRsewjWI92tn5FzadUgoRkxZF5!pRMTpO
+
+{
+    "email": "dandy@gmail.com",
+    "device": "mobile"
+}
+
+###
+POST http://localhost:3000/api/vr/logout
+Content-Type: application/json
+Authorization: Bearer r&iKo4C7%aoUcf5Q5X2fqfjeGpOgg8R!cVQSLjc2hKMh@IYjL67erij#ph8YgNLdg~hNnh1uafpyqFQk5pMKRfZCThrgn?#5%OP5
+
+{
+    "email": "dandy@gmail.com",
+    "device": "mobile"
+}
