@@ -16,4 +16,6 @@ app.use(cors({
 }));
 app.use(router);
 
-export const handler = serverless(app);
+const handler = serverless(app);
+
+export default handler;
