@@ -5,8 +5,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';
 import os from 'os';
+import Log from './middleware/Log.js';
 
 app.use(express.json());
+app.use(Log);
+app.use(express.urlencoded({ extended: true }));
 app.use(router);
 app.use(cors({
     credentials: true,

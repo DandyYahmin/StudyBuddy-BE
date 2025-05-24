@@ -1,40 +1,60 @@
-import log from "../config/Log.js";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const Log = async (req,res,next) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const logPath = path.resolve(__dirname, '../app.log');
+
+const Log = async (req, res, next) => {
     try {
-        let response = '';
+        let responseBody = '';
 
-        const originalSend = res.send
+        const originalSend = res.send;
 
-        res.send = function(body) {
-            response = body;
-    
-            originalSend.call(this, body);
-        };
+        const date = new Date();
+        const options = { timeZone: 'Asia/Jakarta' };
+        const wibDate = new Date(date.toLocaleString('en-US', options));
+        const pad = (n) => String(n).padStart(2, '0');
+        const wibTime = `${pad(wibDate.getDate())}:${pad(wibDate.getMonth() + 1)}:${wibDate.getFullYear()} ${pad(wibDate.getSeconds())}:${pad(wibDate.getMinutes())}:${pad(wibDate.getHours())}`;
 
-        res.on('finish', async () => {
-            const insert = new log({
-                service: process.env.SERVICE,
-                username: req.body.username || 'Outsiders',
-                device: req.body.device,
-                token: req.body.token || 'Outsiders',
-                datetime: new Date(),
+        res.send = function (body) {
+            responseBody = body;
+
+            const logMessage = {
+                datetime: wibTime,
                 endpoint: req.originalUrl,
-                response: response
-            });
+                device: req.body.device || 'Unknown Device',
+                email: req.body.email || 'Outsiders',
+                token: req.body.token || 'Outsiders',
+                response: responseBody
+            };
 
-            const exec = await insert.save();
-        });
+            const logLine = JSON.stringify(logMessage) + '\n';
+
+            setImmediate(() => {
+                fs.appendFile(logPath, logLine, (err) => {
+                    if (err) {
+                        console.error(err);
+                    } else {
+
+                    }
+                });
+            })
+
+            return originalSend.call(this, body);
+        };
 
         next();
 
     } catch (error) {
+        console.error(error);
         return res.json({
             server_status: false,
             server_message: 'StrikeOuts!',
             response: error
         });
     }
-}
+};
 
 export default Log;
