@@ -19,6 +19,7 @@ export async function WebToken(email) {
     
         return token;
     } catch (error) {
+        console.error(error);
         return error;
     }
 }
@@ -43,6 +44,7 @@ export async function MobileToken(email) {
     
         return token;
     } catch (error) {
+        console.error(error);
         return error;
     }
 }

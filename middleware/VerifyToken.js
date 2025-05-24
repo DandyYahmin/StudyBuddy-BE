@@ -52,6 +52,7 @@ export const Token = async (req,res, next) => {
         next();
 
     } catch (error) {
+        console.error(error);
         return res.json({
             server_status: true,
             server_message: 'StrikeOuts!',

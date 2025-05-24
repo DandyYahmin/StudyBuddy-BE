@@ -12,9 +12,9 @@ export async function MRegister(email, password, name) {
         const insertUser = await database.query('INSERT INTO USER(EMAIL,PASSWORD,NAME) VALUES(?,?,?)', [email, md5(password), name]);
 
         return {status: true};
-        
+
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return {status: false};
     }
 }
