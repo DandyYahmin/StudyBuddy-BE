@@ -4,6 +4,7 @@ import router from './routes/index.js';
 import dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';
+import os from 'os';
 
 app.use(express.json());
 app.use(router);
@@ -13,5 +14,29 @@ app.use(cors({
     allowedHeaders: ['Content-Type']
 }));
 
-const port = process.env.SERVER_PORT;
-app.listen(port, () => console.log('Server is running'));
+function getWiFiIP() {
+    const interfaces = os.networkInterfaces();
+
+    const wifiNames = ['Wi-Fi', 'wlan0', 'en0'];
+    for (const name of wifiNames) {
+        const iface = interfaces[name];
+        if (!iface) continue;
+
+        for (const config of iface) {
+            if (config.family === 'IPv4' && !config.internal) {
+                return config.address;
+            }
+        }
+    }
+
+    return 'localhost';
+}
+
+const port = process.env.SERVER_PORT || 3000;
+const wifiIP = getWiFiIP();
+
+app.listen(port, () => {
+    console.log(`✅ Server is running at:`);
+    console.log(`   - Local:   http://localhost:${port}`);
+    console.log(`   - Wi-Fi:   http://${wifiIP}:${port}`);
+});
