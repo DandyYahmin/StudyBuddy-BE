@@ -31,6 +31,7 @@ export const Mandatory = async (req,res,next) => {
         next();
 
     } catch (error) {
+        console.error(error);
         return res.json({
             server_status: false,
             server_message: 'StrikeOuts!',

@@ -41,6 +41,7 @@ export const Register = async(req,res) => {
         });
         
     } catch (error) {
+        console.error(error);
         return res.json({
             server_status: false,
             server_message: 'StrikeOuts!',

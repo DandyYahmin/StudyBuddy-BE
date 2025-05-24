@@ -1,3 +1,4 @@
+import { response } from 'express';
 import database from '../config/Database.js';
 import { WebToken, MobileToken } from '../helper/Token.js';
 import md5 from 'md5';
@@ -11,6 +12,7 @@ export async function MLogout(email,device) {
         return {status: true};
 
     } catch (error) {
+        console.error(error);
         return {status: false};
     }
 }
@@ -40,9 +42,10 @@ export async function MLogin(email, password, device) {
         return {
             status: true,
             message: "Logged in successfully",
-            token: token
+            response: [token]
         }
     } catch (error) {
+        console.error(error);
         return {status: false};
     }
 }
