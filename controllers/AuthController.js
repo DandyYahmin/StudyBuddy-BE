@@ -19,23 +19,24 @@ export const Logout = async(req,res) => {
         
         if (modules.status == false) {
             return res.json({
-                server_status: false,
-                server_message: 'StrikeOuts!',
+                status: false,
+                message: 'StrikeOuts!',
                 response: 'Failed to Logout'
             });
         }
 
         return res.json({
-            server_status: true,
-            server_message: 'HomeRun!',
+            status: true,
+            message: 'HomeRun!',
             response: {
                 messages: 'Logged out successfully'
             }
         });
     } catch (error) {
+        console.error(error);
         return res.json({
-            server_status: false,
-            server_message: 'StrikeOuts!',
+            status: false,
+            message: 'StrikeOuts!',
             response: error
         });
     }
@@ -47,8 +48,8 @@ export const Login = async(req,res) => {
         
         if (!errors.isEmpty()) {
             return res.json({
-                server_status: false,
-                server_message: 'StrikeOuts!',
+                status: false,
+                message: 'StrikeOuts!',
                 response: errors.array().map(error => error.msg)
             });
         }
@@ -58,25 +59,20 @@ export const Login = async(req,res) => {
         
         if(modules.status == false) {
             return res.json({
-                server_status: false,
-                server_message: 'StrikeOuts!',
-                response: {
-                    message: 'email or Password is incorrect'
-                }
+                status: false,
+                message: 'Email or Password is incorrect',
+                response: []
             });
         }
-
-        return res.json({
-            server_status: true,
-            server_message: 'HomeRun!',
-            response: modules
-        });
+        
+        return res.json(modules);
         
     } catch (error) {
+        console.error(error);
         return res.json({
-            server_status: false,
-            server_message: 'StrikeOuts!',
-            response: error
+            status: false,
+            message: 'StrikeOuts!',
+            response: []
         });
     }
 }
