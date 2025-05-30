@@ -41,8 +41,8 @@ export const Token = async (req,res, next) => {
         
         if(checkToken.length === 0 || new Date(checkToken[0].EXPIRED) <= new Date()) {
             return res.json({
-                server_status: false,
-                server_message: 'StrikeOuts!',
+                status: false,
+                message: 'StrikeOuts!',
                 response: {
                     message: 'Invalid access token'
                 }
@@ -54,8 +54,8 @@ export const Token = async (req,res, next) => {
     } catch (error) {
         console.error(error);
         return res.json({
-            server_status: true,
-            server_message: 'StrikeOuts!',
+            status: true,
+            message: 'StrikeOuts!',
             response: error
         });
     }

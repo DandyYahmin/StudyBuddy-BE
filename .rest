@@ -3,9 +3,10 @@ POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-    "email": "dandy@gmail.com",
+    "email": "dandy2@gmail.com",
     "password": "ganteng",
-    "name": "dandy"
+    "name": "dandy",
+    "device": "mobile"
 }
 
 ###
@@ -21,7 +22,17 @@ Content-Type: application/json
 ###
 POST http://localhost:3000/api/vr/test
 Content-Type: application/json
-Authorization: Bearer mRr@JqCJiat~RMlVaINZNc~liey8Bkieaa$KT5-dZmlnlW4mmoFUhIMY2RINvfXYH58KRsewjWI92tn5FzadUgoRkxZF5!pRMTpO
+Authorization: Bearer WiGNgRbh6%fcxXUE7GFN03Wa%8YCoiZLgIx@knJKsJJHGtlcZ7pdU82L6RksajCuEvLZaXkJrQxsoA8Y-Rf0SDUOZ%b06Qr7Gdtc
+
+{
+    "email": "dandy@gmail.com",
+    "device": "mobile"
+}
+
+###
+POST http://localhost:3000/api/vr/biodata
+Content-Type: application/json
+Authorization: Bearer WiGNgRbh6%fcxXUE7GFN03Wa%8YCoiZLgIx@knJKsJJHGtlcZ7pdU82L6RksajCuEvLZaXkJrQxsoA8Y-Rf0SDUOZ%b06Qr7Gdtc
 
 {
     "email": "dandy@gmail.com",

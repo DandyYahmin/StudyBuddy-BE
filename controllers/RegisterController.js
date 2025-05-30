@@ -1,10 +1,12 @@
 import { body, validationResult } from "express-validator";
 import { MRegister } from "../modules/RegisterModules.js";
+import { MLogin } from "../modules/AuthModules.js";
 
 export const RegisterValidator = [
     body('email').not().isEmpty().withMessage('Missing email parameter'),
     body('password').not().isEmpty().withMessage('Missing password parameter'),
-    body('name').not().isEmpty().withMessage('Missing name parameter')
+    body('name').not().isEmpty().withMessage('Missing name parameter'),
+    body('device').not().isEmpty().withMessage('Missing device parameter').isIn(['web', 'mobile']).withMessage('Device must be either web or mobile')
 ];
 
 export const Register = async(req,res) => {
@@ -13,8 +15,8 @@ export const Register = async(req,res) => {
         
         if (!errors.isEmpty()) {
             return res.json({
-                server_status: false,
-                server_message: 'StrikeOuts!',
+                status: false,
+                message: 'StrikeOuts!',
                 response: errors.array().map(error => error.msg)
             });
         }
@@ -24,27 +26,27 @@ export const Register = async(req,res) => {
         
         if(modules.status == false) {
             return res.json({
-                server_status: false,
-                server_message: 'StrikeOuts!',
-                response: {
-                    message: 'Aww email is taken'
-                }
+                status: false,
+                message: 'Aww email is taken',
+                response: []
             });
         }
 
+        const login = await MLogin(body.email, body.password, body.device);
+
         return res.json({
-            server_status: true,
-            server_message: 'HomeRun!',
-            response: {
-                message: `${body.email} is successfully registered to server`
-            }
+            status: true,
+            message: `${body.email} successfully registered to server`,
+            response: [
+                login.response[0]
+            ]
         });
         
     } catch (error) {
         console.error(error);
         return res.json({
-            server_status: false,
-            server_message: 'StrikeOuts!',
+            status: false,
+            message: 'StrikeOuts!',
             response: error
         });
     }
