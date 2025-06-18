@@ -6,6 +6,8 @@ import { TokenValidator, Token } from '../middleware/VerifyToken.js';
 import pkg from 'express-group-routes';
 import { RegisterValidator, Register } from '../controllers/RegisterController.js';
 import { Biodata } from '../controllers/BiodataController.js';
+import { Dashboard } from '../controllers/DashboardController.js';
+import { Task } from '../controllers/TaskController.js';
 
 const router = express.Router();
 
@@ -21,7 +23,11 @@ router.group('/api', router => {
     router.group('/vr', router => {
         router.use('/*', TokenValidator, Token);
         router.post('/test', (req, res) => {res.json({status: true});});
+        router.post('/dashboard', Dashboard);
         router.post('/biodata', Biodata);
+        router.group('/task', router => {
+            router.post('/', Task);
+        });
         router.post('/logout', Logout);
     });
 });

@@ -1,4 +1,7 @@
 ###
+GET https://many-together-grouper.ngrok-free.app
+
+###
 POST http://localhost:3000/api/register
 Content-Type: application/json
 
@@ -14,9 +17,9 @@ POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-    "email": "dandy@gmail.com",
-    "password": "ganteng",
-    "device": "mobile"
+    "email": "dandyganteng@gmail.com",
+    "password": "123",
+    "device": "web"
 }
 
 ###
@@ -47,4 +50,24 @@ Authorization: Bearer r&iKo4C7%aoUcf5Q5X2fqfjeGpOgg8R!cVQSLjc2hKMh@IYjL67erij#ph
 {
     "email": "dandy@gmail.com",
     "device": "mobile"
+}
+
+###
+POST http://localhost:3000/api/vr/dashboard
+Content-Type: application/json
+Authorization: Bearer jXhifdR5byrmZPTJKNYIUfI!5h8tY3JvZiRDbhvMFUaL&RrP808zAJiJ-2qZ1Njul41-V6pXTpq1MjNj06hpVL%o1Gqa&cbw!v8d
+
+{
+    "email": "dandyganteng@gmail.com",
+    "device": "web"
+}
+
+###
+POST http://localhost:3000/api/vr/task/
+Content-Type: application/json
+Authorization: Bearer qeZgmuqJQpVH0anGq5nGbGmDiXksKXNL?Sj8LwLNhh&Zq&6jG?&$nbi%iBV#VPNTLxXQVYqeaj0&fi9veEPOOpxQLK6f#Ik8cdtV
+
+{
+    "email": "dandyganteng@gmail.com",
+    "device": "web"
 }
