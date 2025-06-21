@@ -65,9 +65,33 @@ Authorization: Bearer jXhifdR5byrmZPTJKNYIUfI!5h8tY3JvZiRDbhvMFUaL&RrP808zAJiJ-2
 ###
 POST http://localhost:3000/api/vr/task/
 Content-Type: application/json
-Authorization: Bearer qeZgmuqJQpVH0anGq5nGbGmDiXksKXNL?Sj8LwLNhh&Zq&6jG?&$nbi%iBV#VPNTLxXQVYqeaj0&fi9veEPOOpxQLK6f#Ik8cdtV
+Authorization: Bearer H&fXeVPzA0qFXYDckOauRRkG!e9hE!$#gWRF#rb9bFcfYci##o1qakWnSlaL~xxu3nnPWom#UfjFkQw$uX6NWR%s#bVecUzMPQ9V
 
 {
     "email": "dandyganteng@gmail.com",
     "device": "web"
+}
+
+###
+POST http://localhost:3000/api/vr/task/add
+Content-Type: application/json
+Authorization: Bearer mKbT9HQNjl6cc9QYPpJ9lPKyUpKS%qhOiUoblYQUalnMGWacxzAceHx2CQU!RdN%dgW&fMWUYA3fZ!#tE2WeUYU$QUNTCaoWKM$g
+
+{
+    "email": "dandyganteng@gmail.com",
+    "device": "web",
+    "deadline": "2025-01-01 23:23:00",
+    "task": "test"
+}
+
+###
+POST http://localhost:3000/api/vr/task/complete
+Content-Type: application/json
+Authorization: Bearer H&fXeVPzA0qFXYDckOauRRkG!e9hE!$#gWRF#rb9bFcfYci##o1qakWnSlaL~xxu3nnPWom#UfjFkQw$uX6NWR%s#bVecUzMPQ9V
+
+{
+    "email": "dandyganteng@gmail.com",
+    "device": "web",
+    "id": "8ba63375-48f3-11f0-abfc-02001721ba7b",
+    "status": "F"
 }

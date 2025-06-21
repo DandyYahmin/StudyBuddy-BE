@@ -7,7 +7,7 @@ import pkg from 'express-group-routes';
 import { RegisterValidator, Register } from '../controllers/RegisterController.js';
 import { Biodata } from '../controllers/BiodataController.js';
 import { Dashboard } from '../controllers/DashboardController.js';
-import { Task } from '../controllers/TaskController.js';
+import { Task, AddTask, AddTaskValidator, CompleteTask, CompleteTaskValidator } from '../controllers/TaskController.js';
 
 const router = express.Router();
 
@@ -27,6 +27,8 @@ router.group('/api', router => {
         router.post('/biodata', Biodata);
         router.group('/task', router => {
             router.post('/', Task);
+            router.post('/add', AddTaskValidator, AddTask);
+            router.post('/complete', CompleteTaskValidator, CompleteTask);
         });
         router.post('/logout', Logout);
     });

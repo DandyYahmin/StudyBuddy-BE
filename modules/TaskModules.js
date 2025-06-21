@@ -32,3 +32,27 @@ export async function MTask(email) {
         return {status: false};
     }
 }
+
+export async function MAddTask(email, deadline, task) {
+    try {
+        const insertTask = await database.query('INSERT INTO TASK(EMAIL, DEADLINE, TASK) VALUES(?, ?, ?)', [email, deadline, task]);
+
+        return {status: true};
+
+    } catch (error) {
+        console.error(error);
+        return {status: false};
+    }
+}
+
+export async function MCompleteTask(id, status) {
+    try {
+        const updateTask = await database.query('UPDATE TASK SET STATUS = ? WHERE UUID = ?', [status, id]);
+
+        return {status: true};
+
+    } catch (error) {
+        console.error(error);
+        return {status: false};
+    }
+}
