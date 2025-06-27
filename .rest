@@ -99,9 +99,31 @@ Authorization: Bearer H&fXeVPzA0qFXYDckOauRRkG!e9hE!$#gWRF#rb9bFcfYci##o1qakWnSl
 ###
 POST http://localhost:3000/api/vr/profile/
 Content-Type: application/json
-Authorization: Bearer Kpb#hIvNuDlR4UL1teO!qX?xKdYHbqPghd3IYf$0fPiNrNY?VoMEG31JX6x&NoqugFTVn8Z8Nqo6qVNXbSP1rcYdYiOY213~h2QP
+Authorization: Bearer ShQEX%XcTIu52#c5kGcn9VqgXKGhHURHTp$Oj-G6cIZy#59xV9onNiBKySopNoxUWJdG5jhnRolpZBQJMlbqGp7PsT8bXF7f~8?m
 
 {
     "email": "dandyganteng@gmail.com",
     "device": "web"
+}
+
+###
+POST http://localhost:3000/api/vr/profile/edit
+Content-Type: application/json
+Authorization: Bearer ShQEX%XcTIu52#c5kGcn9VqgXKGhHURHTp$Oj-G6cIZy#59xV9onNiBKySopNoxUWJdG5jhnRolpZBQJMlbqGp7PsT8bXF7f~8?m
+
+{
+    "email": "dandyganteng@gmail.com",
+    "device": "web",
+    "name": "Dandy Ya"
+}
+
+###
+POST http://localhost:3000/api/vr/delete-account
+Content-Type: application/json
+Authorization: Bearer 3QZYW~?fYTPIaMkZ38JiPO@G2HH?ZfOB~Cd7laPLvP0v24SHNpQNYQcCrH2Hzh03EFw0i1YHYZ-FVj$zpxHPTf~qkleWy1lZVsF6
+
+{
+    "email": "dandydarmawan412@gmail.com",
+    "device": "mobile",
+    "password": "dandydarmawan2000"
 }

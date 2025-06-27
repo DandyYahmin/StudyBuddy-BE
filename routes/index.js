@@ -1,5 +1,5 @@
 import express from 'express';
-import { Login, LoginValidator, Logout } from '../controllers/AuthController.js';
+import { DeleteAccount, DeleteAccountValidator, Login, LoginValidator, Logout, UpdatePassword, UpdatePasswordValidator } from '../controllers/AuthController.js';
 // import { MandatoryValidator, Mandatory } from '../middleware/Validator.js';
 import { TokenValidator, Token } from '../middleware/VerifyToken.js';
 // import Log from '../middleware/Log.js';
@@ -7,7 +7,7 @@ import pkg from 'express-group-routes';
 import { RegisterValidator, Register } from '../controllers/RegisterController.js';
 import { Dashboard } from '../controllers/DashboardController.js';
 import { Task, AddTask, AddTaskValidator, CompleteTask, CompleteTaskValidator, DeleteTask, DeleteTaskValidator } from '../controllers/TaskController.js';
-import { Profile } from '../controllers/ProfileController.js';
+import { EditProfile, EditProfileValidator, Profile } from '../controllers/ProfileController.js';
 
 const router = express.Router();
 
@@ -32,7 +32,10 @@ router.group('/api', router => {
         });
         router.group('/profile', router => {
             router.post('/', Profile)
+            router.post('/edit', EditProfileValidator, EditProfile);
         });
+        router.post('/delete-account', DeleteAccountValidator, DeleteAccount);
+        router.post('/change-password', UpdatePasswordValidator, UpdatePassword);
         router.post('/logout', Logout);
     });
 });

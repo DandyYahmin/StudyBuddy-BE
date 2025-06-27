@@ -23,3 +23,13 @@ export async function MProfile(email) {
         return {status: false};
     }
 }
+
+export async function MEditProfile(email, name) {
+    try {
+        await database.query('UPDATE USER SET name = ? WHERE email = ?', [name, email]);
+        return {status: true};
+    } catch (error) {
+        console.error(error);
+        return {status: false};
+    }
+}
