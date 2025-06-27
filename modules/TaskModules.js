@@ -56,3 +56,15 @@ export async function MCompleteTask(id, status) {
         return {status: false};
     }
 }
+
+export async function MDeleteTask(id) {
+    try {
+        const deleteTask = await database.query('DELETE FROM TASK WHERE UUID = ?', [id]);
+
+        return {status: true};
+
+    } catch (error) {
+        console.error(error);
+        return {status: false};
+    }
+}

@@ -16,7 +16,7 @@ export async function MDashboard(email) {
                     ELSE CONCAT(DATEDIFF(deadline, CURDATE()), ' days')
                 END AS badge
             FROM TASK 
-            WHERE email = ? AND status = "F" 
+            WHERE email = ? AND status = "F" AND deadline >= CURDATE() AND deadline < DATE_ADD(CURDATE(), INTERVAL 7 DAY)
             ORDER BY TASK.deadline ASC`, [email]);
 
         return {

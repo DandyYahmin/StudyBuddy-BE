@@ -1,4 +1,4 @@
-import { MTask, MAddTask, MCompleteTask } from "../modules/TaskModules.js";
+import { MTask, MAddTask, MCompleteTask, MDeleteTask } from "../modules/TaskModules.js";
 import { body, validationResult } from "express-validator";
 import moment from 'moment';
 
@@ -20,6 +20,39 @@ export const CompleteTaskValidator = [
     body('id').not().isEmpty().withMessage('Missing id parameter'),
     body('status').not().isEmpty().withMessage('Missing status parameter').isIn(['T', 'F']).withMessage('Status must be either T (true) or F (false)')
 ]
+
+export const DeleteTaskValidator = [
+    body('id').not().isEmpty().withMessage('Missing id parameter')
+]
+
+export const DeleteTask = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.json({
+                status: false,
+                message: 'StrikeOuts!',
+                response: errors.array().map(error => error.msg)
+            });
+        }
+
+        const body = req.body;
+        const modules = await MDeleteTask(body.id);
+
+        return res.json({
+            status: true,
+            message: `Successfully deleted task with ID ${body.id}`,
+            response: []
+        });
+    } catch (error) {
+        console.error(error);
+        return res.json({
+            status: false,
+            message: 'StrikeOuts!',
+            response: error
+        });
+    }
+}
 
 export const CompleteTask = async (req, res) => {
     try {
