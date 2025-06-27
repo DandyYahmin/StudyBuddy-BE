@@ -45,11 +45,11 @@ Authorization: Bearer WiGNgRbh6%fcxXUE7GFN03Wa%8YCoiZLgIx@knJKsJJHGtlcZ7pdU82L6R
 ###
 POST http://localhost:3000/api/vr/logout
 Content-Type: application/json
-Authorization: Bearer r&iKo4C7%aoUcf5Q5X2fqfjeGpOgg8R!cVQSLjc2hKMh@IYjL67erij#ph8YgNLdg~hNnh1uafpyqFQk5pMKRfZCThrgn?#5%OP5
+Authorization: Bearer Kpb#hIvNuDlR4UL1teO!qX?xKdYHbqPghd3IYf$0fPiNrNY?VoMEG31JX6x&NoqugFTVn8Z8Nqo6qVNXbSP1rcYdYiOY213~h2QP
 
 {
-    "email": "dandy@gmail.com",
-    "device": "mobile"
+    "email": "dandyganteng@gmail.com",
+    "device": "web"
 }
 
 ###
@@ -65,7 +65,7 @@ Authorization: Bearer jXhifdR5byrmZPTJKNYIUfI!5h8tY3JvZiRDbhvMFUaL&RrP808zAJiJ-2
 ###
 POST http://localhost:3000/api/vr/task/
 Content-Type: application/json
-Authorization: Bearer H&fXeVPzA0qFXYDckOauRRkG!e9hE!$#gWRF#rb9bFcfYci##o1qakWnSlaL~xxu3nnPWom#UfjFkQw$uX6NWR%s#bVecUzMPQ9V
+Authorization: Bearer Kpb#hIvNuDlR4UL1teO!qX?xKdYHbqPghd3IYf$0fPiNrNY?VoMEG31JX6x&NoqugFTVn8Z8Nqo6qVNXbSP1rcYdYiOY213~h2QP
 
 {
     "email": "dandyganteng@gmail.com",
@@ -94,4 +94,14 @@ Authorization: Bearer H&fXeVPzA0qFXYDckOauRRkG!e9hE!$#gWRF#rb9bFcfYci##o1qakWnSl
     "device": "web",
     "id": "8ba63375-48f3-11f0-abfc-02001721ba7b",
     "status": "F"
+}
+
+###
+POST http://localhost:3000/api/vr/profile/
+Content-Type: application/json
+Authorization: Bearer Kpb#hIvNuDlR4UL1teO!qX?xKdYHbqPghd3IYf$0fPiNrNY?VoMEG31JX6x&NoqugFTVn8Z8Nqo6qVNXbSP1rcYdYiOY213~h2QP
+
+{
+    "email": "dandyganteng@gmail.com",
+    "device": "web"
 }

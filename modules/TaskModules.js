@@ -1,7 +1,7 @@
 import database from '../config/Database.js';
 
 export async function MTask(email) {
-        try {
+    try {
         const [task] = await database.query(`
             SELECT 
                 uuid as id, 
