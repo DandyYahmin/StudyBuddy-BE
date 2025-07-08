@@ -8,6 +8,7 @@ import { RegisterValidator, Register } from '../controllers/RegisterController.j
 import { Dashboard } from '../controllers/DashboardController.js';
 import { Task, AddTask, AddTaskValidator, CompleteTask, CompleteTaskValidator, DeleteTask, DeleteTaskValidator } from '../controllers/TaskController.js';
 import { EditProfile, EditProfileValidator, Profile } from '../controllers/ProfileController.js';
+import { CreateGroup, CreateGroupValidator, Group, HistoryGroup, HistoryGroupValidator, JoinGroup, JoinGroupValidator } from '../controllers/GroupController.js';
 
 const router = express.Router();
 
@@ -34,6 +35,12 @@ router.group('/api', router => {
             router.post('/', Profile)
             router.post('/edit', EditProfileValidator, EditProfile);
         });
+        router.group('/group', router => {
+            router.post('/', Group);
+            router.post('/create', CreateGroupValidator, CreateGroup);
+            router.post('/join', JoinGroupValidator, JoinGroup);
+            router.post('/history', HistoryGroupValidator, HistoryGroup);
+        })
         router.post('/delete-account', DeleteAccountValidator, DeleteAccount);
         router.post('/change-password', UpdatePasswordValidator, UpdatePassword);
         router.post('/logout', Logout);

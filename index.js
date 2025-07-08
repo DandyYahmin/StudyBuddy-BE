@@ -6,16 +6,27 @@ dotenv.config();
 import cors from 'cors';
 import os from 'os';
 import Log from './middleware/Log.js';
+import { Server } from 'socket.io';
+import initializeSocket from './socket/index.js';
+import http from 'http';
+
+const httpServer = http.createServer(app);
+const io = new Server(httpServer, {
+    cors: {
+        origin: "*",
+    }
+});
 
 app.use(express.json());
 app.use(Log);
 app.use(express.urlencoded({ extended: true }));
-app.use(router);
 app.use(cors({
     credentials: true,
     origin: '*',
-    allowedHeaders: ['Content-Type']
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+app.use(router);
+initializeSocket(io);
 
 function getWiFiIP() {
     const interfaces = os.networkInterfaces();
@@ -38,7 +49,7 @@ function getWiFiIP() {
 const port = process.env.SERVER_PORT || 3000;
 const wifiIP = getWiFiIP();
 
-app.listen(port, () => {
+httpServer.listen(port, () => {
     console.log(`✅ Server is running at:`);
     console.log(`   - Local:   http://localhost:${port}`);
     console.log(`   - Wi-Fi:   http://${wifiIP}:${port}`);

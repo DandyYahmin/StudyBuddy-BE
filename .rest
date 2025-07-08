@@ -99,7 +99,7 @@ Authorization: Bearer H&fXeVPzA0qFXYDckOauRRkG!e9hE!$#gWRF#rb9bFcfYci##o1qakWnSl
 ###
 POST http://localhost:3000/api/vr/profile/
 Content-Type: application/json
-Authorization: Bearer ShQEX%XcTIu52#c5kGcn9VqgXKGhHURHTp$Oj-G6cIZy#59xV9onNiBKySopNoxUWJdG5jhnRolpZBQJMlbqGp7PsT8bXF7f~8?m
+Authorization: Bearer QKAYHa0idRlW-wa2LSWAhfChtafSI?YQYgklGceI8xgIoDUk6~4sY-OGI&4QlQD?mjUifUXvlfQ99zJ?kS#bT@ao$gJHcp0cSodO
 
 {
     "email": "dandyganteng@gmail.com",
@@ -126,4 +126,14 @@ Authorization: Bearer 3QZYW~?fYTPIaMkZ38JiPO@G2HH?ZfOB~Cd7laPLvP0v24SHNpQNYQcCrH
     "email": "dandydarmawan412@gmail.com",
     "device": "mobile",
     "password": "dandydarmawan2000"
+}
+
+###
+POST http://localhost:3000/api/vr/group/
+Content-Type: application/json
+Authorization: Bearer -vFpkcK-Ln0IdFJ9@GjFb&Eml8keHVwKOyzEQckCalHjWdF1&hAAUPqN3ZroMOecZnWIg2i%MljAiS7gXtRxMl83qOqOQJgRMvpc
+
+{
+    "email": "dandyganteng@gmail.com",
+    "device": "web"
 }
