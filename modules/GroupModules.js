@@ -4,23 +4,26 @@ import { customAlphabet } from 'nanoid';
 export async function MGroup(email) {
     try {
         const [group] = await database.query(`
-            WITH member_count AS (
-                SELECT 
-                    group_id, 
-                    COUNT(*) as total_members
+            WITH MemberCounts AS (
+                SELECT group_id, COUNT(*) as total_members
                 FROM GROUPMEMBERS
                 GROUP BY group_id
+            ),
+            LastMessageTimes AS (
+                SELECT group_id, MAX(sent_at) AS last_message_time
+                FROM MESSAGES
+                GROUP BY group_id
             )
-            SELECT 
-                cg.id AS id,
+            SELECT cg.id AS id,
                 cg.name,
                 cg.description,
                 mc.total_members AS member
             FROM GROUPMEMBERS gm
             JOIN CHATGROUPS cg ON gm.group_id = cg.id
-            LEFT JOIN member_count mc ON gm.group_id = mc.group_id
+            LEFT JOIN MemberCounts mc ON gm.group_id = mc.group_id
+            LEFT JOIN LastMessageTimes lmt ON gm.group_id = lmt.group_id
             WHERE gm.user_email = ?
-            ORDER BY cg.created_at DESC;
+            ORDER BY COALESCE(lmt.last_message_time, cg.created_at) DESC
         `, [email]);
 
         return {
