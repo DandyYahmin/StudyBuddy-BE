@@ -8,7 +8,7 @@ export async function MProfile(email) {
                 USER.email,
                 COUNT(CASE WHEN TASK.deadline < CURDATE() AND TASK.status = 'F' THEN 1 ELSE NULL END) AS tugas_telat,
                 COUNT(CASE WHEN TASK.status = 'T' THEN 1 ELSE NULL END) AS tugas_selesai,
-                0 as group_chat
+                (SELECT COUNT(*) FROM GROUPMEMBERS gm WHERE gm.user_email = USER.email) AS group_chat
             FROM USER
             LEFT JOIN TASK ON USER.email = TASK.email
             WHERE USER.email = ?
